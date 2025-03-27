@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Delicious Bakery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@7.1.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-size: cover;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('pexels-mariana-kurnyk-844465-1775043.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: brightness(70%);
+            z-index: -1;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #bag {
+            font-size: 40px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: transparent;
+            transition: background 0.3s ease-in-out;
+        }
+
+        body:has(.menu-section:target) .navbar {
+            background: white !important;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .navbar-brand img {
+            width: 80px;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: bold;
+            font-size: 18px;
+            color: #000 !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffffff !important;
+            border-radius: 5px;
+        }
+
+        .shopping-bag {
+            font-size: 30px;
+            color: #000;
+            margin-left: 15px;
+        }
+
+
+        .filter-container {
+            top: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: fixed;
+            width: 100%;
+
+            z-index: 1000;
+            gap: 10px;
+        }
+
+
+        .menu-section {
+            padding-top: 180px;
+            text-align: center;
+
+        }
+
+        .card {
+            background-color: #f8b878;
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+
+        .btn-order {
+            background-color: #5a3e2b;
+            color: white;
+            border-radius: 20px;
+            padding: 8px 15px;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-order:hover {
+            background-color: #40291f;
+        }
+
+
+        .menu-category {
+            display: none;
+        }
+
+        .menu-category.all {
+            display: block;
+        }
+
+        #pastries:target~.menu-section .menu-category,
+        #breads:target~.menu-section .menu-category,
+        #cakes:target~.menu-section .menu-category {
+            display: none;
+        }
+
+        #pastries:target~.menu-section .pastries,
+        #breads:target~.menu-section .breads,
+        #cakes:target~.menu-section .cakes {
+            display: block;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+
+                <a class="navbar-brand" href="index.html">
+                    <img src="Beige and Brown Minimalist Script Modern Cake & Bakery Circle Logo.png"
+                        class="rounded-circle" alt="Logo">
+                </a>
+
+
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item btn btn-outline-dark mx-1"><a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item btn btn-outline-dark mx-1"><a class="nav-link" href="menu.html">Menu</a>
+                        </li>
+                        <li class="nav-item btn btn-outline-dark mx-1"><a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item btn btn-outline-dark mx-1"><a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item btn btn-outline-dark mx-1"><a class="nav-link" href="contact.html">Contact</a></li></ul>
+
+
+                    <a href="shoppingbag.html" class="shopping-bag" id="bag">
+                        <ion-icon name="bag-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="filter-container">
+        <a href="menu.html#all" class="btn btn-outline-dark">All</a>
+        <a href="menu.html#pastries" class="btn btn-outline-dark">Pastries</a>
+        <a href="menu.html#breads" class="btn btn-outline-dark">Breads</a>
+        <a href="menu.html#cakes" class="btn btn-outline-dark">Cakes</a>
+    </div>
+
+    <div id="pastries"></div>
+    <div id="breads"></div>
+    <div id="cakes"></div>
+
+    <section class="container menu-section text-center">
+        <h2 class="mb-4">Our Menu</h2>
+        <div class="row">
+            <!-- Pastries -->
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category pastries all">
+                <div class="card">
+                    <img src="pexels-jeshoots-3724.jpg" class="card-img-top" alt="Croissant" height="150" width="5">
+                    <div class="card-body">
+                        <h5 class="card-title">Croissant</h5>
+                        <p class="card-text">Flaky, buttery, and freshly baked.</p>
+                        <p><strong>Price:</strong> $3.50 | <strong>Rating:</strong> ⭐⭐⭐⭐☆</p>
+                        <a href="Croissant.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category pastries all">
+                <div class="card">
+                    <img src="pexels-enzo-gabrielloni-1247172379-23369279.jpg" class="card-img-top" alt="Croissant" height="150" width="5">
+                    <div class="card-body">
+                        <h5 class="card-title">Danish Pastry</h5>
+                        <p class="card-text">Light and flaky Danish pastries with a sweet filling</p>
+                        <p><strong>Price:</strong> $3.50 | <strong>Rating:</strong> ⭐⭐⭐⭐☆</p>
+                        <a href="danish.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category pastries all">
+                <div class="card">
+                    <img src="pexels-ruken-30206963.jpg" class="card-img-top" alt="Croissant" height="150" width="5">
+                    <div class="card-body">
+                        <h5 class="card-title">Puff Pastry</h5>
+                        <p class="card-text">Delicate, flaky pastry used for both sweet and savory treats.</p>
+                        <p><strong>Price:</strong> $3.50 | <strong>Rating:</strong> ⭐⭐⭐⭐☆</p>
+                        <a href="puff.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category pastries all">
+                <div class="card">
+                    <img src="pexels-iulianna-21434677-30133052.jpg" class="card-img-top" alt="Croissant">
+                    <div class="card-body">
+                        <h5 class="card-title">Apple Strudel</h5>
+                        <p class="card-text">Traditional pastry with a spiced apple filling.</p>
+                        <p><strong>Price:</strong> $3.50 | <strong>Rating:</strong> ⭐⭐⭐☆☆</p>
+                        <a href="apple.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category pastries all">
+                <div class="card">
+                    <img src="pexels-ron-lach-10117826.jpg" class="card-img-top" alt="Croissant">
+                    <div class="card-body">
+                        <h5 class="card-title">Éclair</h5>
+                        <p class="card-text">Flaky, buttery, and freshly baked.</p>
+                        <p><strong>Price:</strong> $3.50 | <strong>Rating:</strong> ⭐⭐⭐⭐☆</p>
+                        <a href="Eclair.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breads -->
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category breads all">
+                <div class="card">
+                    <img src="pexels-beyza-yalcin-153182170-30785702.jpg" class="card-img-top" alt="Baguette">
+                    <div class="card-body">
+                        <h5 class="card-title">Sourdough Bread </h5>
+                        <p class="card-text">A tangy and chewy bread made with a natural yeast starter.</p>
+                        <p><strong>Price:</strong> $2.80 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="sourdough.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category breads all">
+                <div class="card">
+                    <img src="pexels-hatice-uyar-460317377-30693947.jpg" class="card-img-top" alt="Baguette">
+                    <div class="card-body">
+                        <h5 class="card-title">Whole Wheat Bread</h5>
+                        <p class="card-text">A healthy and fiber-rich bread made with whole wheat flour.</p>
+                        <p><strong>Price:</strong> $2.80 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="whole.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category breads all">
+                <div class="card">
+                    <img src="pexels-polina-tankilevitch-5419313.jpg" class="card-img-top" alt="Baguette">
+                    <div class="card-body">
+                        <h5 class="card-title">Banana Bread</h5>
+                        <p class="card-text">A sweet and moist bread made with ripe bananas.</p>
+                        <p><strong>Price:</strong> $2.80 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="banana.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category breads all">
+                <div class="card">
+                    <img src="pexels-marina-zasorina-9433002.jpg" class="card-img-top" alt="Baguette">
+                    <div class="card-body">
+                        <h5 class="card-title">Focaccia Bread</h5>
+                        <p class="card-text">An Italian flatbread topped with olive oil and herbs.</p>
+                        <p><strong>Price:</strong> $2.80 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="focaccaia.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category breads all">
+                <div class="card">
+                    <img src="pexels-brigitte-tohm-36757-186859.jpg" class="card-img-top" alt="Baguette">
+                    <div class="card-body">
+                        <h5 class="card-title">Baguette</h5>
+                        <p class="card-text">Crispy and golden brown.</p>
+                        <p><strong>Price:</strong> $2.80 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="Baguette.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cakes -->
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category cakes all">
+                <div class="card">
+                    <img src="pexels-reginaferraz-6133312.jpg" class="card-img-top" alt="Chocolate Cake"
+                        height="200" width="400">
+                    <div class="card-body">
+                        <h5 class="card-title">Red Velvet Cake</h5>
+                        <p class="card-text">Delicious red velvet cake with a rich cream cheese frosting.</p>
+                        <p><strong>Price:</strong> $5.50 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="redvelvet.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category cakes all">
+                <div class="card">
+                    <img src="pexels-cup-of-couple-8015138.jpg" class="card-img-top" alt="Chocolate Cake"
+                        height="200" width="400">
+                    <div class="card-body">
+                        <h5 class="card-title">Vanilla Cake</h5>
+                        <p class="card-text">A classic vanilla sponge cake with a fluffy texture.</p>
+                        <p><strong>Price:</strong> $5.50 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="vanilla cake.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category cakes all">
+                <div class="card">
+                    <img src="pexels-marta-dzedyshko-1042863-6341572.jpg" class="card-img-top" alt="Chocolate Cake"
+                        height="200" width="400">
+                    <div class="card-body">
+                        <h5 class="card-title">Chocolate Cake</h5>
+                        <p class="card-text">Rich and decadent with a creamy filling.</p>
+                        <p><strong>Price:</strong> $5.50 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="Chocolate Cake.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category cakes all">
+                <div class="card">
+                    <img src="pexels-suzyhazelwood-1126359.jpg" class="card-img-top" alt="Chocolate Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">blueberry cake</h5>
+                        <p class="card-text">Rich and decadent with a creamy filling.</p>
+                        <p><strong>Price:</strong> $5.50 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="blueberry.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 menu-category cakes all">
+                <div class="card">
+                    <img src="pexels-suzyhazelwood-1098592.jpg" class="card-img-top" alt="Chocolate Cake">
+                    <div class="card-body">
+                        <h5 class="card-title">strawberry mango cake</h5>
+                        <p class="card-text">Rich and decadent with a creamy filling.</p>
+                        <p><strong>Price:</strong> $5.50 | <strong>Rating:</strong> ⭐⭐⭐⭐⭐</p>
+                        <a href="strawberrymango.html" class="btn btn-order">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer class="text-center py-3 bg-light">
+        <p>&copy; 2025 Delicious Bakery. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
